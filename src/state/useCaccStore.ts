@@ -5,9 +5,9 @@ import { Orchestrator } from '../modules/Orchestrator';
 import { FeatureHookRegistry } from '../modules/FeatureHookRegistry';
 
 /**
- * Zustand store for managing user input and computed results.  It exposes
+ * Zustand store for managing user input and computed results. It exposes
  * actions to update input fields, trigger the calculation via the
- * orchestrator and reset state.  The orchestrator instance is stored
+ * orchestrator and reset state. The orchestrator instance is stored
  * inside the store to ensure a single shared cache across calculations.
  */
 interface CaccState {
@@ -26,18 +26,23 @@ interface CaccState {
 export const useCaccStore = create<CaccState>((set, get) => {
   // instantiate orchestrator once
   const orchestrator = new Orchestrator(60);
+
   return {
     input: {
       chain: CHAINS[0],
       token: 'ETH',
       action: ACTIONS[0],
-      amount: 1
+      amount: 0 // start with 0 so the UI shows a blank amount field
     },
     loading: false,
-    setChain: (chain) => set((state) => ({ input: { ...state.input, chain } })),
-    setToken: (token) => set((state) => ({ input: { ...state.input, token } })),
-    setAction: (action) => set((state) => ({ input: { ...state.input, action } })),
-    setAmount: (amount) => set((state) => ({ input: { ...state.input, amount } })),
+    setChain: (chain) =>
+      set((state) => ({ input: { ...state.input, chain } })),
+    setToken: (token) =>
+      set((state) => ({ input: { ...state.input, token } })),
+    setAction: (action) =>
+      set((state) => ({ input: { ...state.input, action } })),
+    setAmount: (amount) =>
+      set((state) => ({ input: { ...state.input, amount } })),
     compute: async () => {
       const { input } = get();
       set({ loading: true, error: undefined });

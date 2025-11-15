@@ -4,6 +4,15 @@
   non‑functional requirements for the Crypto Action Cost Calculator (CACC).
   Whenever adding features or refactoring the codebase, please revisit this
   blueprint to ensure alignment with the original intent.
+
+> **Note:** This document describes the *target* architecture and feature set.
+> The current implementation (MVP) only ships the single-action cost calculator:
+> - live gas + price + slippage where available  
+> - per-chain estimates for a single input  
+> - no MEV modeling, chain comparison UI, or advanced fee analytics yet.
+>
+> Treat everything else here as roadmap / design intent, not current behavior.
+
 -->
 
 # 🧭 Crypto Action Cost Calculator (CACC) System Design Blueprint v1.2
